@@ -1,4 +1,6 @@
-# The Ralph Playbook
+# The Ralph Playbook - OpenAI Codex Native Version
+
+> This repo contains minor adaptation on loop.sh and PROMPT_build.md for anyone who are using OpenAI Codex. Full-credit to @ClaytonFarr for putting this together.
 
 December 2025 boiled [Ralph's](https://ghuntley.com/ralph/) powerful yet dumb little face to the top of most AI-related timelines.
 

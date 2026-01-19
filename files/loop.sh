@@ -1,10 +1,10 @@
 #!/bin/bash
-# Usage: ./loop.sh [plan] [max_iterations]
+# Usage: ./loop_codex.sh [plan] [max_iterations]
 # Examples:
-#   ./loop.sh              # Build mode, unlimited iterations
-#   ./loop.sh 20           # Build mode, max 20 iterations
-#   ./loop.sh plan         # Plan mode, unlimited iterations
-#   ./loop.sh plan 5       # Plan mode, max 5 iterations
+#   ./loop_codex.sh              # Build mode, unlimited iterations
+#   ./loop_codex.sh 20           # Build mode, max 20 iterations
+#   ./loop_codex.sh plan         # Plan mode, unlimited iterations
+#   ./loop_codex.sh plan 5       # Plan mode, max 5 iterations
 
 # Parse arguments
 if [ "$1" = "plan" ]; then
@@ -46,18 +46,16 @@ while true; do
         break
     fi
 
-    # Run Ralph iteration with selected prompt
-    # -p: Headless mode (non-interactive, reads from stdin)
-    # --dangerously-skip-permissions: Auto-approve all tool calls (YOLO mode)
-    # --output-format=stream-json: Structured output for logging/monitoring
-    # --model opus: Primary agent uses Opus for complex reasoning (task selection, prioritization)
-    #               Can use 'sonnet' in build mode for speed if plan is clear and tasks well-defined
-    # --verbose: Detailed execution logging
-    cat "$PROMPT_FILE" | claude -p \
-        --dangerously-skip-permissions \
-        --output-format=stream-json \
-        --model opus \
-        --verbose
+    # Run Codex iteration with selected prompt (non-interactive)
+    # exec: Headless mode (reads from stdin when no prompt argument is provided)
+    # --dangerously-bypass-approvals-and-sandbox: Auto-approve all tool calls and disable sandboxing
+    # --json: Structured output for logging/monitoring
+    # --model gpt-5.2-codex: Primary agent uses GPT-5 for complex reasoning
+    #                Can use 'gpt-5.2-codex-mini' in build mode for speed if plan is clear
+    cat "$PROMPT_FILE" | codex exec \
+        --dangerously-bypass-approvals-and-sandbox \
+        --json \
+        --model gpt-5.2-codex
 
     # Push changes after each iteration
     git push origin "$CURRENT_BRANCH" || {
