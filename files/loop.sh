@@ -1,10 +1,10 @@
 #!/bin/bash
-# Usage: ./loop_codex.sh [plan] [max_iterations]
+# Usage: ./loop.sh [plan] [max_iterations]
 # Examples:
-#   ./loop_codex.sh              # Build mode, unlimited iterations
-#   ./loop_codex.sh 20           # Build mode, max 20 iterations
-#   ./loop_codex.sh plan         # Plan mode, unlimited iterations
-#   ./loop_codex.sh plan 5       # Plan mode, max 5 iterations
+#   ./loop.sh              # Build mode, unlimited iterations
+#   ./loop.sh 20           # Build mode, max 20 iterations
+#   ./loop.sh plan         # Plan mode, unlimited iterations
+#   ./loop.sh plan 5       # Plan mode, max 5 iterations
 
 # Parse arguments
 if [ "$1" = "plan" ]; then
